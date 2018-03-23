@@ -42,7 +42,13 @@ def vote(textBody,sender):
         the_letter = options[0].upper()
         # if the letter is one of the poll_data["options"]
         if the_letter in poll_data["letter_options"]:
-            # then add the sender to that vote
+            # remove their vote from all options 
+            for each in poll_data["letter_options"]:
+                # if their vote is in the set 
+                if sender in poll_data["vote_tracker"][each]:
+                    # then remove it
+                    poll_data["vote_tracker"][each].remove(sender)
+            # then add the sender to the one the just recently voted for
             poll_data["vote_tracker"][the_letter].add(sender)
     
     # display the new status
@@ -69,9 +75,9 @@ print (poll("""whats my name?
 -Soo 
 -Sew""",""))
 
-print (vote("a","1"))
-print (vote("a","2"))
-print (vote("b","1"))
+print (vote("a","1")) # person 1 votes for "a"
+print (vote("a","2")) # person 2 votes for "a"
+print (vote("b","1")) # person 1 changes their vote to "b"
 
 
 print (poll("""whats up?
