@@ -68,3 +68,34 @@ def vote():
         output_ += "\n("+ str(number_of_votes) +" votes) "+option_letter+". "+each_option
 
     return output_
+
+
+@bp.route('/lunch?')
+def lunch_q():
+    """!lunch?"""
+    global poll_data
+
+    lunchPlacesString = db.findDefn("lunchPlaces")
+    
+    if not lunchPlacesString:
+        return 'lunchPlaces not found. Add it with !define lunchPlaces, seperate each location with a comma'
+    
+    # get the poll question 
+    poll_data["question"] = "Where are we getting lunch?"
+    # get the poll options 
+    poll_data["options"] = lunchPlacesString.split(',') 
+    # reset the last poll and replace it with a new poll 
+    poll_data["letter_options"] = []
+    poll_data["vote_tracker"] = {}
+    # create the output to display 
+    output_ = poll_data["question"] 
+    # regenerate variables that will display the poll_data["options"] 
+    index_ = 64 # start right before the ASCII 'A' 
+    for each_option in poll_data["options"]:
+        index_ += 1
+        option_letter = chr(index_) 
+        poll_data["letter_options"].append(option_letter) 
+        poll_data["vote_tracker"][option_letter] = set()
+        output_ += "\n"+option_letter+". "+each_option
+
+    return output_
