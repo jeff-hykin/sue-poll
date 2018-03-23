@@ -12,7 +12,7 @@ def poll():
     textBody = msg.textBody
     sender = msg.buddyId
 
-    options = textBody.split('\n-') 
+    options = textBody.split('\n-')
     
     # get the poll question 
     poll_data["question"] = options.pop(0)
@@ -42,7 +42,7 @@ def vote():
     textBody = msg.textBody
     sender = msg.buddyId
 
-    options = textBody.split(' ')  
+    options = textBody.split(' ')
     
     # if there is actually a correct input
     if len(options) == 1:
@@ -69,7 +69,6 @@ def vote():
 
     return output_
 
-
 @bp.route('/lunch')
 def lunch():
     """!lunch"""
@@ -83,7 +82,7 @@ def lunch():
     # get the poll question 
     poll_data["question"] = "Where are we getting lunch?"
     # get the poll options 
-    poll_data["options"] = lunchPlacesString.split(',') 
+    poll_data["options"] = [each.strip() for each in lunchPlacesString.split(',')]
     # reset the last poll and replace it with a new poll 
     poll_data["letter_options"] = []
     poll_data["vote_tracker"] = {}
