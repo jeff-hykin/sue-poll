@@ -70,9 +70,9 @@ def vote():
     return output_
 
 
-@bp.route('/lunch?')
-def lunch_q():
-    """!lunch?"""
+@bp.route('/lunch')
+def lunch():
+    """!lunch"""
     global poll_data
 
     lunchPlacesString = db.findDefn("lunchPlaces")
