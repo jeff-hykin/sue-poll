@@ -1,6 +1,6 @@
 poll_data = {
     "letter_options" : [],
-    "poll_data["options"]" : []
+    "options" : [],
     "question" : "",
     "poll":{}
 }
@@ -22,12 +22,12 @@ def poll():
     poll_data["letter_options"] = []
     poll_data["vote_tracker"] = {}
     # create the output to display 
-    output_ = poll_data["question"] + "\n"
+    output_ = poll_data["question"] 
     # regenerate variables that will display the poll_data["options"] 
     index_ = 64 # start right before the ASCII 'A' 
     for each_option in poll_data["options"]:
         index_ += 1
-        option_letter = char(index_) 
+        option_letter = chr(index_) 
         poll_data["letter_options"].append(option_letter) 
         poll_data["vote_tracker"][option_letter] = set()
         output_ += "\n"+option_letter+". "+each_option
@@ -53,11 +53,11 @@ def vote():
             poll_data["vote_tracker"][the_letter].add(sender)
     
     # display the new status
-    output_ = poll_data["question"] + "\n"
+    output_ = poll_data["question"]
     index_ = 64 # start right before the ASCII 'A' 
     for each_option in poll_data["options"]:
         index_ += 1
-        option_letter = char(index_) 
+        option_letter = chr(index_) 
         number_of_votes = len(poll_data["vote_tracker"][option_letter])
         output_ += "\n("+ str(number_of_votes) +" votes) "+option_letter+". "+each_option
 
