@@ -12,7 +12,7 @@ def poll():
     textBody = msg.textBody
     sender = msg.buddyId
 
-    options = textBody.split('\n-') # FIXME, not sure if options would include the 'poll' or '!poll' 
+    options = textBody.split('\n-') 
     
     # get the poll question 
     poll_data["question"] = options.pop(0)
@@ -42,7 +42,7 @@ def vote():
     textBody = msg.textBody
     sender = msg.buddyId
 
-    options = textBody.split(' ')  # FIXME, not sure if poll_data["options"] would include the 'vote' or '!vote' 
+    options = textBody.split(' ')  
     
     # if there is actually a correct input
     if len(options) == 1:
