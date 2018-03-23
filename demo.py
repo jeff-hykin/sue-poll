@@ -9,7 +9,7 @@ def poll(textBody,sender):
     """!poll <name/question>\n-<option1>  \n-<option2> ... \n<option n>"""
     global poll_data
 
-    options = textBody.split('\n-') # FIXME, not sure if options would include the 'poll' or '!poll' 
+    options = textBody.split('\n-')
     
     # get the poll question 
     poll_data["question"] = options.pop(0)
