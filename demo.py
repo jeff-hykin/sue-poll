@@ -35,7 +35,7 @@ def vote(textBody,sender):
     """!vote <letter>"""
     global poll_data
 
-    options = textBody.split(' ')  # FIXME, not sure if poll_data["options"] would include the 'vote' or '!vote' 
+    options = textBody.split(' ')  
     
     # if there is actually a correct input
     if len(options) == 1:
