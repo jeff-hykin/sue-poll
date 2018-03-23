@@ -1,6 +1,3 @@
-#
-#  Demo is at the bottom
-#
 poll_data = {
     "letter_options" : [],
     "options" : [],
@@ -74,4 +71,13 @@ print (poll("""whats my name?
 
 print (vote("a","1"))
 print (vote("a","2"))
+print (vote("b","1"))
+
+
+print (poll("""whats up?
+-Dog
+-Sue 
+-Sue-poll""",""))
+
+
 print (vote("b","1"))
