@@ -1,3 +1,8 @@
+import random
+#
+# Demo is at bottom 
+#
+
 poll_data = {
     "letter_options" : [],
     "options" : [],
@@ -9,7 +14,7 @@ def poll(textBody,sender):
     """!poll <name/question>\n-<option1>  \n-<option2> ... \n<option n>"""
     global poll_data
 
-    options = textBody.split('\n-')
+    options = textBody.split('\n-') 
     
     # get the poll question 
     poll_data["question"] = options.pop(0)
@@ -35,7 +40,7 @@ def vote(textBody,sender):
     """!vote <letter>"""
     global poll_data
 
-    options = textBody.split(' ')  
+    options = textBody.split(' ')
     
     # if there is actually a correct input
     if len(options) == 1:
@@ -63,6 +68,37 @@ def vote(textBody,sender):
     return output_
 
 
+def lunch():
+    """!lunch"""
+    global poll_data
+    
+    # normally this is a database call db.findDefn("lunchPlaces")
+    # so its demo is just using a random choice 
+    lunchPlacesString = random.choice(["Subway, Potbelly, Antonios", None]) 
+    
+    if not lunchPlacesString:
+        return 'lunchPlaces not found. Add it with !define lunchPlaces, seperate each location with a comma'
+    
+    # get the poll question 
+    poll_data["question"] = "Where are we getting lunch?"
+    # get the poll options (seperate by commas and trim the whitespace )
+    poll_data["options"] = [each.strip() for each in lunchPlacesString.split(',')]
+    # reset the last poll and replace it with a new poll 
+    poll_data["letter_options"] = []
+    poll_data["vote_tracker"] = {}
+    # create the output to display 
+    output_ = poll_data["question"] 
+    # regenerate variables that will display the poll_data["options"] 
+    index_ = 64 # start right before the ASCII 'A' 
+    for each_option in poll_data["options"]:
+        index_ += 1
+        option_letter = chr(index_) 
+        poll_data["letter_options"].append(option_letter) 
+        poll_data["vote_tracker"][option_letter] = set()
+        output_ += "\n"+option_letter+". "+each_option
+
+    return output_
+
 
 
 #
@@ -75,9 +111,9 @@ print (poll("""whats my name?
 -Soo 
 -Sew""",""))
 
-print (vote("a","1")) # person 1 votes for "a"
-print (vote("a","2")) # person 2 votes for "a"
-print (vote("b","1")) # person 1 changes their vote to "b"
+print (vote("a","5555555555"))
+print (vote("a","7777777777"))
+print (vote("b","5555555555"))
 
 
 print (poll("""whats up?
@@ -86,4 +122,9 @@ print (poll("""whats up?
 -Sue-poll""",""))
 
 
-print (vote("b","1"))
+print (vote("b","5555555555"))
+
+
+print(lunch())
+print (vote("b","5555555555"))
+print (vote("b","7777777777"))
